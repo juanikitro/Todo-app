@@ -1,0 +1,17 @@
+.modal__background {
+	background: rgba(32, 35, 41, 0.2);
+	position: fixed;
+	top: -10px;
+	left: -10px;
+	right: -10px;
+	bottom: -10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	z-index: 20000;
+}
+
+.modal__disabled {
+	display: none !important;
+}
