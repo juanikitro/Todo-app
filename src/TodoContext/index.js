@@ -11,12 +11,28 @@ function TodoProvider(props) {
 		error
 	} = useLocalStorage('TODOS_V1', []);
 	const [searchValue, setSearchValue] = React.useState('');
+	const [searchColor, setSearchColor] = React.useState('');
+	const [searchTodayTodos, setSearchTodayTodos] = React.useState(false);
 	const [openModal, setOpenModal] = React.useState(false);
 
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
 	const totalTodos = todos.length;
 
 	let searchedTodos = [];
+
+	// if (searchTodayTodos === false) {
+	// 	searchedTodos = todos;
+	// } else {
+	// 	searchedTodos = todos.filter((todo) => {
+	// 		const fechaInicio = new Date().getTime();
+	// 		const fechaFin = new Date(todo.hour).getTime();
+	// 		const diff = fechaFin - fechaInicio;
+	// 		const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
+
+	// 		console.log(searchedTodos);
+	// 		return noRealDiff === -0;
+	// 	});
+	// } // TODO!
 
 	if (!searchValue.length >= 1) {
 		searchedTodos = todos;
@@ -25,6 +41,25 @@ function TodoProvider(props) {
 			const todoText = todo.tag.toLowerCase();
 			const searchText = searchValue.toLowerCase();
 			return todoText.includes(searchText);
+		});
+	}
+
+	if (searchColor === '1') {
+		searchedTodos = searchedTodos.filter((todo) => {
+			const todoColor = todo.color;
+			return todoColor.includes(searchColor);
+		});
+	}
+	if (searchColor === '2') {
+		searchedTodos = searchedTodos.filter((todo) => {
+			const todoColor = todo.color;
+			return todoColor.includes(searchColor);
+		});
+	}
+	if (searchColor === '3') {
+		searchedTodos = searchedTodos.filter((todo) => {
+			const todoColor = todo.color;
+			return todoColor.includes(searchColor);
 		});
 	}
 
@@ -39,13 +74,14 @@ function TodoProvider(props) {
 		saveTodos(newTodos);
 	};
 
-	const addTodo = (text, tag, hour) => {
+	const addTodo = (text, tag, hour, color) => {
 		const newTodos = [...todos];
 		newTodos.push({
 			completed: false,
 			text,
 			tag,
-			hour
+			hour,
+			color
 		});
 		saveTodos(newTodos);
 	};
@@ -57,6 +93,25 @@ function TodoProvider(props) {
 		saveTodos(newTodos);
 	};
 
+	function hourDiff(hour) {
+		const fechaInicio = new Date().getTime();
+		const fechaFin = new Date(hour).getTime();
+
+		const diff = fechaFin - fechaInicio;
+		const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
+		const realDiff = noRealDiff + ' days left';
+
+		if (hour === '') {
+			return '';
+		} else if (realDiff === '0 days left') {
+			return 'Today!';
+		} else if (realDiff === '1 days left') {
+			return 'Tomorrow!';
+		} else {
+			return realDiff;
+		}
+	}
+
 	return (
 		<TodoContext.Provider
 			value={{
@@ -66,12 +121,16 @@ function TodoProvider(props) {
 				completedTodos,
 				searchValue,
 				setSearchValue,
+				setSearchColor,
+				searchColor,
+				setSearchTodayTodos,
 				searchedTodos,
 				completeTodo,
 				deleteTodo,
 				addTodo,
 				openModal,
-				setOpenModal
+				setOpenModal,
+				hourDiff
 			}}
 		>
 			{props.children}

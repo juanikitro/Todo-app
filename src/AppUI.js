@@ -23,17 +23,38 @@ function AppUI() {
 	return (
 		<React.Fragment>
 			<TodoCounter />
-			<section className="container">
-				<section className="row mt-5">
-					<article className="col">
+			<main className="container d-flex align-content-between flex-wrap flex-column">
+				<section className=" d-md-inline-flex w-100 justify-content-around">
+					<article
+						style={{
+							minWidth: '30%',
+							backgroundColor: '#0000000a',
+							borderRadius: '20px',
+							height: '100%'
+						}}
+						className="mt-5 p-3 d-sm-block w-auto"
+					>
 						<TodoSearch />
 					</article>
-					<article className="col">
+					<article
+						style={{
+							minWidth: '60%'
+						}}
+						className=" mt-5 d-sm-block"
+					>
 						<TodoList>
-							{error && <p>Shit, here we go again :(</p>}
-							{loading && <p>Thinking...</p>}
+							{error && (
+								<p className="text-center">
+									Shit, here we go again :(
+								</p>
+							)}
+							{loading && (
+								<p className="text-center">Loading...</p>
+							)}
 							{!loading && !searchedTodos.length && (
-								<p>Yo can create your first TODO!</p>
+								<p className="text-center">
+									No more! Congratulations!
+								</p>
 							)}
 
 							{searchedTodos.map((todo) => (
@@ -42,13 +63,13 @@ function AppUI() {
 									text={todo.text}
 									tag={todo.tag}
 									hour={todo.hour}
+									color={todo.color}
 									completed={todo.completed}
 									onComplete={() => completeTodo(todo.text)}
 									onDelete={() => deleteTodo(todo.text)}
 								/>
 							))}
 						</TodoList>
-
 						{!!openModal && (
 							<Modal>
 								<TodoForm />
@@ -58,7 +79,15 @@ function AppUI() {
 						<CreateTodoButton setOpenModal={setOpenModal} />
 					</article>
 				</section>
-			</section>
+				<footer
+					className="text-center"
+					style={{
+						marginTop: '100px'
+					}}
+				>
+					<p>Made with ❤️ by JuaniKitro</p>
+				</footer>
+			</main>
 		</React.Fragment>
 	);
 }

@@ -12,8 +12,11 @@ function CreateTodoButton(props) {
 		>
 			<button
 				type="button"
-				className="btn btn-dark"
+				className="btn btn-secondary"
 				onClick={onClickButton}
+				style={{
+					borderRadius: '20px'
+				}}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,13 @@
-.done{
-    text-decoration:line-through;
+.done {
+	text-decoration: line-through;
+}
+
+.low {
+	background-color: #fff5ca;
+}
+.medium {
+	background-color: #ffe1be;
+}
+.high {
+	background-color: #ffb7b7;
 }
