@@ -3,8 +3,15 @@ import '../static/todoItem.css';
 import { TodoContext } from '../TodoContext/index';
 
 function TodoItem(props) {
-	const { hourDiff } = React.useContext(TodoContext);
+	const { hourDiff, setSearchTag, searchTag } = React.useContext(TodoContext);
 
+	function searchThisTag() {
+		if (searchTag !== props.tag) {
+			setSearchTag(props.tag);
+		} else {
+			setSearchTag('');
+		}
+	}
 	return (
 		<li
 			style={{ borderRadius: '20px' }}
@@ -35,6 +42,7 @@ function TodoItem(props) {
 							color: '#212529',
 							backgroundColor: '#00000045'
 						}}
+						onClick={searchThisTag}
 						className="badge text-light rounded-pill small m-1"
 					>
 						{props.tag}

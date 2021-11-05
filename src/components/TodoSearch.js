@@ -3,16 +3,16 @@ import { TodoContext } from '../TodoContext';
 
 function TodoSearch() {
 	const {
-		searchTitle,
-		setSearchTitle,
+		searchTag,
+		setSearchTag,
 		searchColor,
 		setSearchColor,
 		setSearchTodayTodos,
 		setSearchDoTodos
 	} = React.useContext(TodoContext);
 
-	const onSearchTitleChange = (event) => {
-		setSearchTitle(event.target.value);
+	const onSearchTagChange = (event) => {
+		setSearchTag(event.target.value);
 	};
 
 	const onColorChange = (event) => {
@@ -48,11 +48,11 @@ function TodoSearch() {
 			</button>
 			<div class="collapse p-3" id="collapseExample">
 				<input
-					onChange={onSearchTitleChange}
-					value={searchTitle}
+					onChange={onSearchTagChange}
+					value={searchTag}
 					className="mb-4 form-control text-center"
 					type="text"
-					placeholder="Tags"
+					placeholder="Tag"
 					style={{
 						borderRadius: '12.5px'
 					}}

@@ -10,7 +10,7 @@ function TodoProvider(props) {
 		loading,
 		error
 	} = useLocalStorage('TODOS_V1', []);
-	const [searchTitle, setSearchTitle] = React.useState('');
+	const [searchTag, setSearchTag] = React.useState('');
 	const [searchColor, setSearchColor] = React.useState('');
 	const [searchTodayTodos, setSearchTodayTodos] = React.useState(false);
 	const [searchDoTodos, setSearchDoTodos] = React.useState(false);
@@ -21,12 +21,12 @@ function TodoProvider(props) {
 
 	let searchedTodos = [todos];
 
-	if (!searchTitle.length >= 1) {
+	if (!searchTag.length >= 1) {
 		searchedTodos = todos;
 	} else {
 		searchedTodos = todos.filter((todo) => {
 			const todoText = todo.tag.toLowerCase();
-			const searchText = searchTitle.toLowerCase();
+			const searchText = searchTag.toLowerCase();
 			return todoText.includes(searchText);
 		});
 	}
@@ -126,8 +126,8 @@ function TodoProvider(props) {
 				error,
 				totalTodos,
 				completedTodos,
-				searchTitle,
-				setSearchTitle,
+				searchTag,
+				setSearchTag,
 				setSearchColor,
 				searchColor,
 				setSearchTodayTodos,
