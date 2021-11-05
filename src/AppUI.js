@@ -52,7 +52,7 @@ function AppUI() {
 							{loading && <MyLoader />}
 							{!loading && !searchedTodos.length && (
 								<p className="text-center">
-									No more! Congratulations!
+									You can create your first ToDo! ↘️
 								</p>
 							)}
 
