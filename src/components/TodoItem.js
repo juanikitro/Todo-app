@@ -56,7 +56,10 @@ function TodoItem(props) {
 				<button onClick={props.onDelete} className="btn">
 					<i className="my-1 bi bi-x-lg"></i>
 				</button>
-				<button className="btn" onClick={props.onComplete}>
+				<button
+					className={`btn ${props.completed && 'completed '}`}
+					onClick={props.onComplete}
+				>
 					<i className="my-1 bi bi-check-lg"></i>
 				</button>
 			</div>

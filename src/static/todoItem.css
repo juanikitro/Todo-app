@@ -5,9 +5,25 @@
 .low {
 	background-color: #fff5ca;
 }
+.low:hover {
+	background-color: #fff2b9;
+	cursor: pointer;
+}
 .medium {
 	background-color: #ffe1be;
 }
+.medium:hover {
+	background-color: #ffd6a7;
+	cursor: pointer;
+}
 .high {
-	background-color: #ffb7b7;
+	background-color: #ffc5c5;
+}
+.high:hover {
+	background-color: #ffaeae;
+	cursor: pointer;
+}
+
+.completed {
+	color: rgb(0, 199, 0);
 }

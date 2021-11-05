@@ -10,37 +10,42 @@ function TodoProvider(props) {
 		loading,
 		error
 	} = useLocalStorage('TODOS_V1', []);
-	const [searchValue, setSearchValue] = React.useState('');
+	const [searchTitle, setSearchTitle] = React.useState('');
 	const [searchColor, setSearchColor] = React.useState('');
 	const [searchTodayTodos, setSearchTodayTodos] = React.useState(false);
+	const [searchDoTodos, setSearchDoTodos] = React.useState(false);
 	const [openModal, setOpenModal] = React.useState(false);
 
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
 	const totalTodos = todos.length;
 
-	let searchedTodos = [];
+	let searchedTodos = [todos];
 
-	// if (searchTodayTodos === false) {
-	// 	searchedTodos = todos;
-	// } else {
-	// 	searchedTodos = todos.filter((todo) => {
-	// 		const fechaInicio = new Date().getTime();
-	// 		const fechaFin = new Date(todo.hour).getTime();
-	// 		const diff = fechaFin - fechaInicio;
-	// 		const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
-
-	// 		console.log(searchedTodos);
-	// 		return noRealDiff === -0;
-	// 	});
-	// } // TODO!
-
-	if (!searchValue.length >= 1) {
+	if (!searchTitle.length >= 1) {
 		searchedTodos = todos;
 	} else {
 		searchedTodos = todos.filter((todo) => {
 			const todoText = todo.tag.toLowerCase();
-			const searchText = searchValue.toLowerCase();
+			const searchText = searchTitle.toLowerCase();
 			return todoText.includes(searchText);
+		});
+	}
+
+	if (searchTodayTodos === true) {
+		searchedTodos = todos.filter((todo) => {
+			const fechaInicio = new Date().getTime();
+			const fechaFin = new Date(todo.hour).getTime();
+			const diff = fechaFin - fechaInicio;
+			const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
+			return noRealDiff === -0;
+		});
+	}
+
+	if (searchDoTodos === true) {
+		searchedTodos = todos.filter((todo) => {
+			if (todo.completed === true) {
+				return todo;
+			}
 		});
 	}
 
@@ -107,6 +112,8 @@ function TodoProvider(props) {
 			return 'Today!';
 		} else if (realDiff === '1 days left') {
 			return 'Tomorrow!';
+		} else if (realDiff === '-1 days left') {
+			return 'Yesterday...';
 		} else {
 			return realDiff;
 		}
@@ -119,11 +126,12 @@ function TodoProvider(props) {
 				error,
 				totalTodos,
 				completedTodos,
-				searchValue,
-				setSearchValue,
+				searchTitle,
+				setSearchTitle,
 				setSearchColor,
 				searchColor,
 				setSearchTodayTodos,
+				setSearchDoTodos,
 				searchedTodos,
 				completeTodo,
 				deleteTodo,

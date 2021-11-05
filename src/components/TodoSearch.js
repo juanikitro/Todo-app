@@ -3,15 +3,16 @@ import { TodoContext } from '../TodoContext';
 
 function TodoSearch() {
 	const {
-		searchValue,
-		setSearchValue,
+		searchTitle,
+		setSearchTitle,
 		searchColor,
 		setSearchColor,
-		setSearchTodayTodos
+		setSearchTodayTodos,
+		setSearchDoTodos
 	} = React.useContext(TodoContext);
 
-	const onSearchValueChange = (event) => {
-		setSearchValue(event.target.value);
+	const onSearchTitleChange = (event) => {
+		setSearchTitle(event.target.value);
 	};
 
 	const onColorChange = (event) => {
@@ -21,7 +22,9 @@ function TodoSearch() {
 	const searchTodayTodos = () => {
 		setSearchTodayTodos((prevState) => !prevState);
 	};
-
+	const searchDoTodos = () => {
+		setSearchDoTodos((prevState) => !prevState);
+	};
 	return (
 		<React.Fragment>
 			<button
@@ -45,8 +48,8 @@ function TodoSearch() {
 			</button>
 			<div class="collapse p-3" id="collapseExample">
 				<input
-					onChange={onSearchValueChange}
-					value={searchValue}
+					onChange={onSearchTitleChange}
+					value={searchTitle}
 					className="mb-4 form-control text-center"
 					type="text"
 					placeholder="Tags"
@@ -92,7 +95,24 @@ function TodoSearch() {
 						High
 					</option>
 				</select>
-				<button onClick={searchTodayTodos}>asdasd</button>
+				<div className="mb-3 d-flex justify-content-center align-items-center">
+					<label className="mx-2">Today tasks</label>
+					<input
+						className="mx-2"
+						style={{ width: '16px', height: '16px' }}
+						type="checkbox"
+						onChange={searchTodayTodos}
+					/>
+				</div>
+				<div className="d-flex justify-content-center align-items-center">
+					<label className="mx-2">Tasks done</label>
+					<input
+						className="mx-2"
+						style={{ width: '16px', height: '16px' }}
+						type="checkbox"
+						onChange={searchDoTodos}
+					/>
+				</div>
 			</div>
 		</React.Fragment>
 	);
