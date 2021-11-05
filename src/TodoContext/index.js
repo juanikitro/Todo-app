@@ -104,7 +104,7 @@ function TodoProvider(props) {
 
 		const diff = fechaFin - fechaInicio;
 		const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
-		const realDiff = noRealDiff + ' days left';
+		const realDiff = noRealDiff + 1 + ' days left';
 
 		if (hour === '') {
 			return '';
