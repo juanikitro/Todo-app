@@ -37,7 +37,7 @@ function TodoProvider(props) {
 			const fechaFin = new Date(todo.hour).getTime();
 			const diff = fechaFin - fechaInicio;
 			const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
-			return noRealDiff === -0;
+			return noRealDiff === -1;
 		});
 	}
 
