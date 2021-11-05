@@ -19,35 +19,33 @@ function TodoProvider(props) {
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
 	const totalTodos = todos.length;
 
-	let searchedTodos = [todos];
+	let searchedTodos = todos; //start with the entire todo list
 
-	if (!searchTag.length >= 1) {
-		searchedTodos = todos;
-	} else {
-		searchedTodos = todos.filter((todo) => {
-			const todoText = todo.tag.toLowerCase();
-			const searchText = searchTag.toLowerCase();
-			return todoText.includes(searchText);
-		});
-	}
+  if (searchTag.length >= 1) {
+    // use the same searchedTodos to continue filtering items
+    searchedTodos = searchedTodos.filter((todo) => {
+      const todoText = todo.tag.toLowerCase();
+      const searchText = searchTag.toLowerCase();
+      return todoText.includes(searchText);
+    });
+  }
 
-	if (searchTodayTodos === true) {
-		searchedTodos = todos.filter((todo) => {
-			const fechaInicio = new Date().getTime();
-			const fechaFin = new Date(todo.hour).getTime();
-			const diff = fechaFin - fechaInicio;
-			const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
-			return noRealDiff === -0;
-		});
-	}
+  if (searchTodayTodos === true) {
+    // use the same searchedTodos to continue filtering items
+    searchedTodos = searchedTodos.filter((todo) => {
+      const fechaInicio = new Date().getTime();
+      const fechaFin = new Date(todo.hour).getTime();
+      const diff = fechaFin - fechaInicio;
+      const noRealDiff = Math.round(diff / (1000 * 60 * 60 * 24));
+      return noRealDiff === -0;
+    });
+  }
 
-	if (searchDoTodos === true) {
-		searchedTodos = todos.filter((todo) => {
-			if (todo.completed === true) {
-				return todo;
-			}
-		});
-	}
+  if (searchDoTodos) {
+    // use the same searchedTodos to continue filtering items
+    searchedTodos = searchedTodos.filter((todo) => todo.completed !== searchDoTodos);
+  }
+	
 
 	if (searchColor === '1') {
 		searchedTodos = searchedTodos.filter((todo) => {
