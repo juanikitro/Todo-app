@@ -30,7 +30,8 @@ function TodoItem(props) {
 					style={{
 						textAlign: 'left',
 						overflow: 'hidden',
-						fontWeight: '500'
+						fontWeight: '500',
+						color: '#343434'
 					}}
 					className={`m-1 fs-6 text ${props.completed && 'done'}`}
 				>
@@ -61,7 +62,10 @@ function TodoItem(props) {
 				className="d-flex"
 				style={{ minWidth: '10%', flexDirection: 'column' }}
 			>
-				<button onClick={props.onDelete} className="btn">
+				<button
+					onClick={props.onDelete}
+					className={`btn ${props.completed && 'completed '}`}
+				>
 					<i className="my-1 bi bi-x-lg"></i>
 				</button>
 				<button

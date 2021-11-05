@@ -8,6 +8,7 @@ import { TodoItem } from './components/TodoItem.js';
 import { CreateTodoButton } from './components/CreateTodoButton.js';
 import { Modal } from './components/Modal';
 import { TodoForm } from './components/TodoForm.js';
+import { MyLoader } from './components/Loader';
 
 function AppUI() {
 	const {
@@ -48,9 +49,7 @@ function AppUI() {
 									Shit, here we go again :(
 								</p>
 							)}
-							{loading && (
-								<p className="text-center">Loading...</p>
-							)}
+							{loading && <MyLoader />}
 							{!loading && !searchedTodos.length && (
 								<p className="text-center">
 									No more! Congratulations!

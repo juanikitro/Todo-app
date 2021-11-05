@@ -15,14 +15,16 @@ function CreateTodoButton(props) {
 				className="btn btn-secondary"
 				onClick={onClickButton}
 				style={{
-					borderRadius: '20px'
+					borderRadius: '20px',
+					backgroundColor: '#0000000a',
+					borderColor: '#ffffff00'
 				}}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="64"
 					height="64"
-					fill="currentColor"
+					fill="#343434"
 					className="bi bi-plus"
 					viewBox="0 0 16 16"
 				>
